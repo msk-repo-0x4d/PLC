@@ -25,7 +25,8 @@ int main()
 
     const int NUM_REGS = 2;
     uint16_t tab_reg[NUM_REGS];
-    // Read 2 registers from address 0 of server ID 10.
+
+    // Read 2 registers from addr 1536 (refer to ladder logic for address) of slave Id 1
     int read_regs = modbus_read_registers(ctx, 1536, NUM_REGS, tab_reg);
 
     if(read_regs != NUM_REGS) {
@@ -40,5 +41,7 @@ int main()
     }
 
     modbus_close(ctx);
+    modbus_free(ctx);
+
     return 0;
 }
