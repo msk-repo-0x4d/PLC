@@ -1,5 +1,10 @@
-
 from pymodbus.client import ModbusSerialClient
+
+## For Debugging ##
+# import logging
+# logging.basicConfig()
+# log = logging.getLogger()
+# log.setLevel(logging.DEBUG)
 
 client = ModbusSerialClient(
     method='rtu',
@@ -18,7 +23,8 @@ if client.connect():  # Trying for connect to Modbus Server/Slave
     for i in range(1536, 1538, 1):
         print('read_holding_registers - ' + str(i))
         '''Reading from holding register with the below content.'''
-        res = client.read_holding_registers(address=i, count=1, slave=0x01, unit=1)
+        res = client.read_holding_registers(address=i, count=2, slave=0x01)
+        ## its "slave" not "unit" to set the slave id
 
         if not res.isError():
             print(res.registers)
